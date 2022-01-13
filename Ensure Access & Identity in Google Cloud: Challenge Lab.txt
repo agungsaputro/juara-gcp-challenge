@@ -1,0 +1,41 @@
+nano role-definition.yaml
+
+
+title: "orca_storage_update"
+description: "Permissions"
+stage: "ALPHA"
+includedPermissions:
+- storage.buckets.get
+- storage.objects.get
+- storage.objects.list
+- storage.objects.update
+- storage.objects.create
+
+
+gcloud iam roles create orca_storage_update  --project $DEVSHELL_PROJECT_ID \
+--file role-definition.yaml
+
+
+nano role-definition.yaml
+
+
+title: "orca_storage_editor_646"
+description: "Permissions"
+stage: "ALPHA"
+includedPermissions:
+- storage.buckets.get
+- storage.objects.get
+- storage.objects.list
+- storage.objects.update
+- storage.objects.create
+
+gcloud iam roles create orca_storage_editor_646 --project $DEVSHELL_PROJECT_ID \
+--file role-definition.yaml
+
+gcloud container clusters create orca-cluster-109 --num-nodes 1 --master-ipv4-cidr=172.16.0.64/28 --network orca-build-vpc --subnetwork orca-build-subnet --enable-master-authorized-networks  --master-authorized-networks 192.168.10.2/32 --enable-ip-alias --enable-private-nodes --enable-private-endpoint --service-account orca-private-cluster-126-sa@qwiklabs-gcp-04-67513a0551ee.iam.gserviceaccount.com --zone us-east1-b
+
+gcloud container clusters get-credentials orca-cluster-109 --internal-ip --zone us-east1-b --project qwiklabs-gcp-04-67513a0551ee
+
+kubectl create deployment hello-server --image=gcr.io/google-samples/hello-app:1.0
+
+https://www.canva.com/design/DAE1RYNotVQ/z1SWhPPeY5pRobWTQsINQw/view?website#2:welcome-to-this-channel
