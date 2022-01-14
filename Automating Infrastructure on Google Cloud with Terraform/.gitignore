@@ -1,0 +1,11 @@
+.cache
+.config
+.docker
+.terraform
+.terraform.d
+.theia
+.yarn
+.bash_history
+.bash_logout
+.bashrc
+.profile
