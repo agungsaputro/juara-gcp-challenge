@@ -1,0 +1,58 @@
+npm install
+
+gcloud builds submit \
+  --tag gcr.io/$GOOGLE_CLOUD_PROJECT/rest-api:0.1
+
+gcloud beta run deploy netflix-dataset-service-371 \
+  --image gcr.io/$GOOGLE_CLOUD_PROJECT/rest-api:0.1 \
+  --platform managed \
+  --region us-central1 \
+  --allow-unauthenticated
+  
+
+
+SERVICE_URL=$(gcloud beta run services describe netflix-dataset-service-371 --platform managed --region us-central1 --format="value(status.url)")
+echo $SERVICE_URL
+curl -X GET $SERVICE_URL
+
+
+npm install
+gcloud builds submit \
+  --tag gcr.io/$GOOGLE_CLOUD_PROJECT/rest-api:0.2
+
+gcloud beta run deploy netflix-dataset-service-371 \
+  --image gcr.io/$GOOGLE_CLOUD_PROJECT/rest-api:0.2 \
+  --platform managed \
+  --region us-central1 \
+  --allow-unauthenticated
+  
+SERVICE_URL=$(gcloud beta run services describe netflix-dataset-service-371 --platform managed --region us-central1 --format="value(status.url)")
+echo $SERVICE_URL
+curl -X GET $SERVICE_URL/2019
+  
+npm install
+gcloud builds submit \
+  --tag gcr.io/$GOOGLE_CLOUD_PROJECT/frontend-staging:0.1
+gcloud beta run deploy frontend-staging-service-133 \
+  --image gcr.io/$GOOGLE_CLOUD_PROJECT/frontend-staging:0.1 \
+  --platform managed \
+  --region us-central1 \
+  --allow-unauthenticated
+  
+  
+
+https://netflix-dataset-service-371-nfcmg3ecgq-uc.a.run.app
+
+npm install
+gcloud builds submit \
+  --tag gcr.io/$GOOGLE_CLOUD_PROJECT/frontend-production:0.1
+  
+gcloud beta run deploy frontend-production-service-870 \
+  --image gcr.io/$GOOGLE_CLOUD_PROJECT/frontend-production:0.1 \
+  --platform managed \
+  --region us-central1 \
+  --allow-unauthenticated
+  
+  
+
+https://chriskyfung.github.io/blog/qwiklabs/serverless-firebase-development-challenge-lab
